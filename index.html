@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отчёт команды</title>
+    <!-- <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script> -->
+</head>
+
+<body>
+
+    <!DOCTYPE html>
+    <html lang="ru">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Отчёт команды</title>
+
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                min-height: 100vh;
+                color: #334237;
+                background: linear-gradient(135deg, #fff0f5, #fff9e8, #fff2ed);
+                font-family: Arial, sans-serif;
+            }
+
+            main {
+                /* max-width: 720px;
+                margin: auto;
+                padding: 25px 16px 60px; */
+                width: 100%;
+                min-height: 90vh;
+                margin: 0;
+                padding: 25px 24px 60px;
+            }
+
+            h1 {
+                margin: 10px 0;
+                font-size: 34px;
+                text-align: center;
+            }
+
+            h2 {
+                margin: 0 0 15px;
+                font-size: 22px;
+            }
+
+            p {
+                line-height: 1.5;
+            }
+
+            .subtitle {
+                color: #82766f;
+                font-size: 12px;
+                letter-spacing: 2px;
+            }
+
+            .card {
+                margin: 18px 0;
+                padding: 22px;
+                border: 1px solid #eee2df;
+                border-radius: 20px;
+                background: #fbedf5;
+            }
+
+            label {
+                display: block;
+                margin-top: 12px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            input,
+            select,
+            textarea,
+            button {
+                font: inherit;
+            }
+
+            input,
+            select,
+            textarea {
+                width: 100%;
+                margin-top: 7px;
+                padding: 12px;
+                border: 1px solid #d8ddd3;
+                border-radius: 10px;
+                background: #fffdfa;
+                color: #334237;
+                font-size: 16px;
+            }
+
+            textarea {
+                min-height: 80px;
+                resize: vertical;
+            }
+
+            button {
+                padding: 12px 16px;
+                border: none;
+                border-radius: 10px;
+                background: #eceee7;
+                color: #334237;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            button:disabled {
+                opacity: 0.45;
+                cursor: default;
+            }
+
+            button:focus-visible,
+            input:focus-visible,
+            select:focus-visible,
+            textarea:focus-visible {
+                outline: 3px solid #c59a55;
+                outline-offset: 3px;
+            }
+
+            .green {
+                background: #249858;
+                color: white;
+            }
+
+            .blue {
+                background: #367bda;
+                color: white;
+            }
+
+            .wide {
+                width: 100%;
+            }
+
+            .actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-top: 16px;
+            }
+
+            .actions button {
+                flex: 1;
+            }
+
+            .hint {
+                color: #7b8075;
+                font-size: 13px;
+            }
+
+            .task {
+                padding: 8px 0 16px;
+                border-bottom: 1px solid #eee6df;
+            }
+
+            .task-fields {
+                display: grid;
+                grid-template-columns: 100px 1fr;
+                gap: 12px;
+            }
+
+            .remove {
+                display: block;
+                width: 30%;
+                margin: 12px 0 0 auto;
+                padding: 5px 10px;
+                border-radius: 7px;
+                background: #c95360;
+                color: white;
+                font-size: 13px;
+                font-weight: normal;
+            }
+
+            details {
+                margin-top: 12px;
+            }
+
+            summary {
+                color: #6e7c68;
+                font-size: 14px;
+                cursor: pointer;
+            }
+
+            .networks {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 9px;
+            }
+
+            .network {
+                padding: 12px 5px;
+                background: #fffaf6;
+                border: 1px solid #eee1da;
+                font-size: 13px;
+            }
+
+            .network.selected {
+                background: #edf5e8;
+                border-color: #719862;
+            }
+
+            .network small {
+                display: block;
+                margin-top: 6px;
+                color: #76826e;
+                font-size: 11px;
+                font-weight: normal;
+            }
+
+            .icon {
+                display: grid;
+                place-items: center;
+                width: 42px;
+                height: 42px;
+                margin: 0 auto 7px;
+                border-radius: 13px;
+                background: var(--brand);
+            }
+
+            .icon svg {
+                width: 32px;
+                height: 32px;
+            }
+
+            .statistics {
+                padding-top: 18px;
+                margin-top: 18px;
+                border-top: 1px solid #eee1da;
+            }
+
+            .metrics {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0 12px;
+            }
+
+            .notice {
+                padding: 14px;
+                margin-top: 14px;
+                border-radius: 10px;
+                background: #fff1d9;
+            }
+
+            #report-image {
+                display: block;
+                width: 100%;
+                height: auto;
+                margin-top: 20px;
+                background: white;
+                box-shadow: 0 5px 25px #644a3915;
+            }
+
+            [hidden] {
+                display: none !important;
+            }
+
+            @media (max-width: 420px) {
+                main {
+                    padding: 20px 12px 40px;
+                }
+
+                .card {
+                    padding: 16px;
+                }
+
+                h1 {
+                    font-size: 30px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <main>
+            <header>
+                <p class="subtitle">КОМАНДА · ИТОГИ НЕДЕЛИ</p>
+                <h1>Мой отчёт</h1>
+            </header>
+
+            <section id="home" class="card">
+                <h2>Соберём результаты недели?</h2>
+                <button id="start" class="green wide">Заполнить отчёт</button>
+            </section>
+
+            <form id="editor" hidden autocomplete="off">
+                <section class="card">
+                    <label for="person">Участник</label>
+
+                    <select id="person" required>
+                        <option value="">Выбери имя</option>
+                    </select>
+
+                    <div id="change-person" class="notice" hidden>
+                        <p>Сменить участника и очистить текущий отчёт?</p>
+
+                        <div class="actions">
+                            <button id="confirm-person" type="button">
+                                Сменить
+                            </button>
+
+                            <button id="cancel-person" type="button">
+                                Остаться
+                            </button>
+                        </div>
+                    </div>
+
+                    <label for="week">Неделя отчёта</label>
+                    <select id="week" required></select>
+                </section>
+
+                <section class="card">
+                    <h2>Моя работа</h2>
+
+                    <div id="tasks"></div>
+
+                    <div class="actions">
+                        <button id="add-task" type="button" class="blue" disabled>
+                            ＋ Добавить пункт
+                        </button>
+
+                        <button id="save-list" type="button" class="green" disabled>
+                            Сохранить мой список
+                        </button>
+                    </div>
+
+                    <p id="list-status" class="hint" role="status"></p>
+                </section>
+
+                <section class="card">
+                    <label for="unfinished">Что не получилось сделать</label>
+
+                    <textarea id="unfinished" maxlength="1200" placeholder="Напиши здесь"></textarea>
+                </section>
+
+                <section class="card">
+                    <h2>Выбери соцсеть</h2>
+
+                    <div id="networks" class="networks"></div>
+                    <div id="social-forms"></div>
+                </section>
+
+                <p id="error" class="notice" role="alert" hidden></p>
+
+                <button id="generate" type="submit" class="green wide">
+                    Получить отчёт
+                </button>
+            </form>
+
+            <section id="result" hidden>
+                <div class="actions">
+                    <button id="download" class="green">
+                        Сохранить в виде картинки
+                    </button>
+
+                    <button id="edit">
+                        Изменить
+                    </button>
+                </div>
+
+                <p id="density" class="hint" hidden>
+                    Много текста: отчёт уменьшен до одной картинки.
+                </p>
+
+                <img id="report-image" alt="Готовый отчёт">
+
+                <button id="new-report" class="wide" style="margin-top: 18px">
+                    Новый отчёт
+                </button>
+
+                <div id="reset-confirm" class="notice" hidden>
+                    <p>Очистить отчёт и начать заново?</p>
+
+                    <div class="actions">
+                        <button id="confirm-reset">Начать заново</button>
+                        <button id="cancel-reset">Отмена</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <script>
+            "use strict";
+
+            // 1. ЛИЧНЫЕ СПИСКИ РАБОТ
+
+            const TEAM = {
+                "LeTo": [
+                    "Создание каруселей для Instagram",
+                    "Создание изображений для постов",
+                    "Создание сайта",
+                    "Поиск сообществ",
+                    "Кураторское сопровождение участников",
+                    "Ведение сообщества ВКонтакте"
+                ],
+
+                "Алекс": [
+                    "Общение с клиентами",
+                    "Публикация в Instagram (Reels и карусели)",
+                    "Диагностика / кастдев"
+                ],
+
+                "Альфия": [
+                    "Публикация постов в Telegram",
+                    "Оформление трудового договора на месяц",
+                    "Проверка постов",
+                    "Проверка заданий",
+                    "Подготовка договоров с клиентами"
+                ],
+
+                "Алина": [
+                    "Публикация Shorts на YouTube",
+                    "Обработка видео",
+                    "Создание бота",
+                    "Удаление пауз и запинок в аудио и видео",
+                    "Создание заданий"
+                ],
+
+
+                 "Залина": [
+                    "Нарезка практикумов и тренингов",
+                    "Создание и наполнение сайта",
+                    "Создание бота",
+                    "Создание заданий для рабочей тетради",
+                    "Удаление пауз и запинок в аудио и видео"
+                ]
+            };
+
+            // 2. ПОЛЯ СТАТИСТИКИ ДЛЯ КАЖДОЙ СОЦСЕТИ
+
+            const FIELDS = {
+                "Telegram": [
+                    "Посты",
+                    "Подписчики всего",
+                    "Подписались",
+                    "Отписались",
+                    "Просмотры постов",
+                    "Реакции",
+                    "Пересылки",
+                    "Комментарии"
+                ],
+
+                "Instagram": [
+                    "Посты и карусели",
+                    "Reels",
+                    "Stories",
+                    "Подписчики всего",
+                    "Подписались",
+                    "Отписались",
+                    "Просмотры",
+                    "Охват",
+                    "Лайки",
+                    "Комментарии",
+                    "Сохранения",
+                    "Поделились",
+                    "Посещения профиля",
+                    "Нажатия на внешнюю ссылку"
+                ],
+
+                "ВК": [
+                    "Публикации",
+                    "Подписчики всего",
+                    "Подписались",
+                    "Отписались",
+                    "Охват",
+                    "Просмотры",
+                    "Посетители",
+                    "Лайки",
+                    "Комментарии",
+                    "Репосты",
+                    "Переходы по ссылкам"
+                ],
+
+                "YouTube": [
+                    "Видео",
+                    "Shorts",
+                    "Подписчики всего",
+                    "Подписались",
+                    "Отписались",
+                    "Просмотры",
+                    "Время просмотра, часы",
+                    "Средняя длительность, секунды",
+                    "Показы обложек",
+                    "CTR обложек, %",
+                    "Лайки",
+                    "Комментарии",
+                    "Поделились"
+                ],
+
+                "Threads": [
+                    "Публикации",
+                    "Подписчики всего",
+                    "Новые подписчики",
+                    "Просмотры",
+                    "Лайки",
+                    "Ответы",
+                    "Репосты",
+                    "Цитирования",
+                    "Переходы по ссылкам"
+                ],
+
+                "Rutube": [
+                    "Видео",
+                    "Подписчики всего",
+                    "Просмотры",
+                    "Уникальные зрители",
+                    "Время просмотра, часы",
+                    "Средняя длительность, секунды",
+                    "Лайки",
+                    "Комментарии"
+                ],
+
+                "Max": [
+                    "Посты",
+                    "Подписчики всего",
+                    "Просмотры публикаций",
+                    "Реакции"
+                ]
+            };
+
+            // 3. ЦВЕТА И ВСТРОЕННЫЕ ЗНАЧКИ
+
+            const COLORS = {
+                "Telegram": "#279dca",
+                "Instagram": "linear-gradient(35deg, #ffd36a, #ef4778, #8758ce)",
+                "ВК": "#267bea",
+                "YouTube": "#ed303c",
+                "Threads": "#252525",
+                "Rutube": "#253d67",
+                "Max": "linear-gradient(135deg, #339ce9, #7654db)"
+            };
+
+            const ICONS = {
+                "Telegram": `
+    <path fill="white"
+      d="M5 15 27 6 22 27 15 21 11 25 12 18 23 10 10 16Z"/>
+  `,
+
+                "Instagram": `
+    <rect x="6" y="6" width="20" height="20" rx="6"
+      fill="none" stroke="white" stroke-width="2.5"/>
+    <circle cx="16" cy="16" r="5"
+      fill="none" stroke="white" stroke-width="2.5"/>
+    <circle cx="23" cy="9" r="1.5" fill="white"/>
+  `,
+
+                "ВК": `
+    <text x="16" y="23" text-anchor="middle"
+      fill="white" font-size="20" font-weight="bold"
+      font-family="Arial">VK</text>
+  `,
+
+                "YouTube": `
+    <rect x="3" y="7" width="26" height="18"
+      rx="6" fill="white"/>
+    <path d="m13 11 9 5-9 5Z" fill="#ed303c"/>
+  `,
+
+                "Threads": `
+    <text x="16" y="24" text-anchor="middle"
+      fill="white" font-size="28"
+      font-family="Arial">@</text>
+  `,
+
+                "Rutube": `
+    <text x="14" y="25" text-anchor="middle"
+      fill="white" font-size="25" font-weight="bold"
+      font-family="Arial">R</text>
+    <circle cx="26" cy="7" r="4" fill="#f63553"/>
+  `,
+
+                "Max": `
+    <path d="M6 17C6 3 28 3 27 17c0 9-9 12-14 7l-6 3 1-7Z"
+      fill="white"/>
+    <path d="m12 18 3-7 3 5 4-6-2 11-4-3-3 3Z"
+      fill="#7760ed"/>
+  `
+            };
+
+            // 4. ОБЩИЕ ПЕРЕМЕННЫЕ
+
+            const $ = id => document.getElementById(id);
+            const socialItems = [];
+
+            let currentPerson = "";
+            let pendingPerson = "";
+            let taskNumber = 0;
+            let imageUrl = "";
+            let downloadName = "";
+
+            const listKey = name => "team-works-v3-" + name;
+
+            function showScreen(screen) {
+                ["home", "editor", "result"].forEach(id => {
+                    $(id).hidden = id !== screen;
+                });
+
+                window.scrollTo(0, 0);
+            }
+
+            // 5. ПЯТЬ НЕДЕЛЬ: ТЕКУЩАЯ И ЧЕТЫРЕ СЛЕДУЮЩИЕ
+
+            function fillWeeks() {
+                const today = new Date();
+
+                const monday = new Date(
+                    today.getFullYear(),
+                    today.getMonth(),
+                    today.getDate(),
+                    12
+                );
+
+                monday.setDate(
+                    monday.getDate() - (monday.getDay() + 6) % 7
+                );
+
+                const format = date => date.toLocaleDateString("ru-RU", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                });
+
+                $("week").replaceChildren();
+
+                for (let i = -1; i < 5; i++) {
+                    const start = new Date(monday);
+                    start.setDate(start.getDate() + i * 7);
+
+                    const end = new Date(start);
+                    end.setDate(end.getDate() + 6);
+
+                    const sameMonth =
+                        start.getMonth() === end.getMonth() &&
+                        start.getFullYear() === end.getFullYear();
+
+                    const label = sameMonth
+                        ? start.getDate() + "–" + format(end)
+                        : format(start) + " — " + format(end);
+
+                    $("week").add(new Option(label, label));
+                    if (i === 0) {
+                        $("week").value = label;
+                    }
+                }
+            }
+
+            // 6. СТРОКА РАБОТЫ
+
+            function addTask(name = "") {
+                const row = document.createElement("div");
+                const id = ++taskNumber;
+
+                row.className = "task";
+
+                row.innerHTML = `
+    <label for="task-${id}">Пункт</label>
+
+    <input
+      id="task-${id}"
+      class="task-name"
+      maxlength="160"
+      placeholder="Название работы"
+    >
+
+    <div class="task-fields">
+      <label>
+        Количество
+        <input
+          class="task-count"
+          type="number"
+          min="0"
+          max="9999999"
+          step="1"
+          inputmode="numeric"
+          placeholder="—"
+        >
+      </label>
+
+      <label>
+        Статус
+        <select class="task-status">
+          <option value="">Не включать</option>
+          <option>Сделано</option>
+          <option>В процессе</option>
+          <option>Не сделано</option>
+        </select>
+      </label>
+    </div>
+
+    <details>
+      <summary>Комментарий</summary>
+
+      <label>
+        Пояснение
+        <textarea
+          class="task-comment"
+          maxlength="600"
+        ></textarea>
+      </label>
+    </details>
+
+    <button
+      type="button"
+      class="remove"
+      aria-label="Удалить работу"
+    >
+      Удалить пункт из списка
+    </button>
+  `;
+
+                row.querySelector(".task-name").value = name;
+
+                row.querySelector(".remove").onclick = () => {
+                    row.remove();
+                };
+
+                $("tasks").append(row);
+
+                return row;
+            }
+
+            $("add-task").onclick = () => {
+                const row = addTask();
+                row.querySelector(".task-name").focus();
+            };
+
+            // Сохраняются только названия работ этого участника.
+
+            $("save-list").onclick = () => {
+                const names = [...document.querySelectorAll(".task-name")]
+                    .map(input => input.value.trim())
+                    .filter(Boolean);
+
+                try {
+                    localStorage.setItem(
+                        listKey(currentPerson),
+                        JSON.stringify(names)
+                    );
+
+                    $("list-status").textContent = "Список сохранён";
+                } catch {
+                    $("list-status").textContent =
+                        "Браузер не разрешил сохранить список";
+                }
+            };
+
+            // 7. СОЦСЕТИ
+
+            function closeSocialForms() {
+                socialItems.forEach(item => {
+                    item.panel.hidden = true;
+                    item.button.setAttribute("aria-expanded", "false");
+                });
+            }
+
+            function validateOpenSocialForm() {
+                for (const item of socialItems) {
+                    if (item.panel.hidden) continue;
+
+                    for (const input of item.inputs) {
+                        if (!input.reportValidity()) return false;
+                    }
+                }
+
+                return true;
+            }
+
+            Object.entries(FIELDS).forEach(([name, fields], index) => {
+                const button = document.createElement("button");
+
+                button.type = "button";
+                button.className = "network";
+                button.style.setProperty("--brand", COLORS[name]);
+                button.setAttribute("aria-expanded", "false");
+                button.setAttribute("aria-controls", "social-" + index);
+
+                button.innerHTML = `
+    <span class="icon">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        ${ICONS[name]}
+      </svg>
+    </span>
+    ${name}
+    <small>Добавить</small>
+  `;
+
+                const panel = document.createElement("div");
+
+                panel.id = "social-" + index;
+                panel.className = "statistics";
+                panel.hidden = true;
+
+                panel.innerHTML = `
+    <h2>${name}</h2>
+
+    <div class="metrics">
+      ${fields.map(field => `
+        <label>
+          ${field}
+          <input
+            type="number"
+            min="0"
+            max="999999999999"
+            step="any"
+            inputmode="decimal"
+            placeholder="—"
+            disabled
+          >
+        </label>
+      `).join("")}
+    </div>
+
+    <div class="actions">
+      <button type="button" class="green finish">
+        Готово — выбрать ещё
+      </button>
+
+      <button type="button" class="exclude">
+        Не включать
+      </button>
+    </div>
+  `;
+
+                const item = {
+                    name,
+                    fields,
+                    button,
+                    panel,
+                    inputs: [...panel.querySelectorAll("input")],
+                    selected: false
+                };
+
+                socialItems.push(item);
+
+                button.onclick = () => {
+                    if (!validateOpenSocialForm()) return;
+
+                    closeSocialForms();
+
+                    item.selected = true;
+                    panel.hidden = false;
+
+                    button.classList.add("selected");
+                    button.setAttribute("aria-expanded", "true");
+                    button.querySelector("small").textContent = "Изменить";
+
+                    item.inputs.forEach(input => {
+                        input.disabled = false;
+                    });
+
+                    panel.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                };
+
+                panel.querySelector(".finish").onclick = () => {
+                    if (!validateOpenSocialForm()) return;
+
+                    closeSocialForms();
+
+                    $("networks").scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+                };
+
+                panel.querySelector(".exclude").onclick = () => {
+                    item.selected = false;
+
+                    item.inputs.forEach(input => {
+                        input.disabled = true;
+                    });
+
+                    button.classList.remove("selected");
+                    button.querySelector("small").textContent = "Добавить";
+
+                    closeSocialForms();
+                };
+
+                item.inputs.forEach(input => {
+                    input.addEventListener("invalid", () => {
+                        panel.hidden = false;
+                        button.setAttribute("aria-expanded", "true");
+                    });
+                });
+
+                $("networks").append(button);
+                $("social-forms").append(panel);
+            });
+
+            // 8. НОВЫЙ ОТЧЁТ И ВЫБОР УЧАСТНИКА
+
+            Object.keys(TEAM).forEach(name => {
+                $("person").add(new Option(name, name));
+            });
+
+            function resetForm() {
+                $("editor").reset();
+                $("tasks").replaceChildren();
+
+                currentPerson = "";
+                pendingPerson = "";
+
+                $("add-task").disabled = true;
+                $("save-list").disabled = true;
+                $("list-status").textContent = "";
+
+                $("error").hidden = true;
+                $("change-person").hidden = true;
+                $("reset-confirm").hidden = true;
+
+                fillWeeks();
+
+                socialItems.forEach(item => {
+                    item.selected = false;
+                    item.panel.hidden = true;
+
+                    item.button.classList.remove("selected");
+                    item.button.setAttribute("aria-expanded", "false");
+                    item.button.querySelector("small").textContent = "Добавить";
+
+                    item.inputs.forEach(input => {
+                        input.value = "";
+                        input.disabled = true;
+                    });
+                });
+
+                if (imageUrl) URL.revokeObjectURL(imageUrl);
+
+                imageUrl = "";
+                $("report-image").removeAttribute("src");
+            }
+
+            function selectPerson(name) {
+                const selectedWeek = $("week").value;
+
+                resetForm();
+
+                if ([...$("week").options].some(option => {
+                    return option.value === selectedWeek;
+                })) {
+                    $("week").value = selectedWeek;
+                }
+
+                currentPerson = name;
+                $("person").value = name;
+
+                let list = TEAM[name] || [];
+
+                try {
+                    const saved = JSON.parse(
+                        localStorage.getItem(listKey(name))
+                    );
+
+                    if (
+                        Array.isArray(saved) &&
+                        saved.every(item => typeof item === "string")
+                    ) {
+                        list = saved;
+                    }
+                } catch { }
+
+                list.forEach(name => addTask(name));
+
+                $("add-task").disabled = !name;
+                $("save-list").disabled = !name;
+            }
+
+            $("start").onclick = () => {
+                resetForm();
+                showScreen("editor");
+            };
+
+            $("person").onchange = () => {
+                const name = $("person").value;
+
+                if (!currentPerson) {
+                    selectPerson(name);
+                    return;
+                }
+
+                pendingPerson = name;
+                $("person").value = currentPerson;
+                $("change-person").hidden = false;
+            };
+
+            $("confirm-person").onclick = () => {
+                selectPerson(pendingPerson);
+            };
+
+            $("cancel-person").onclick = () => {
+                $("change-person").hidden = true;
+            };
+
+            $("edit").onclick = () => {
+                showScreen("editor");
+            };
+
+            $("new-report").onclick = () => {
+                $("reset-confirm").hidden = false;
+            };
+
+            $("cancel-reset").onclick = () => {
+                $("reset-confirm").hidden = true;
+            };
+
+            $("confirm-reset").onclick = () => {
+                resetForm();
+                showScreen("editor");
+            };
+
+            // 9. СОБИРАЕМ ОТМЕЧЕННЫЕ РАБОТЫ И ЗАПОЛНЕННЫЕ ЦИФРЫ
+
+            function collectData() {
+                const tasks = [...document.querySelectorAll(".task")]
+                    .map(row => ({
+                        name: row.querySelector(".task-name").value.trim(),
+                        count: row.querySelector(".task-count").value,
+                        status: row.querySelector(".task-status").value,
+                        comment: row.querySelector(".task-comment").value.trim()
+                    }))
+                    .filter(task => task.status);
+
+                const socials = socialItems
+                    .filter(item => item.selected)
+                    .map(item => ({
+                        name: item.name,
+
+                        values: item.inputs
+                            .map((input, index) => [
+                                item.fields[index],
+                                input.value
+                            ])
+                            .filter(pair => pair[1] !== "")
+                    }))
+                    .filter(item => item.values.length);
+
+                return {
+                    person: currentPerson,
+                    week: $("week").value,
+                    tasks,
+                    socials,
+                    unfinished: $("unfinished").value.trim()
+                };
+            }
+
+            // 10. КОМПАКТНАЯ КАРТИНКА ОТЧЁТА
+
+            function makeReport(data) {
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
+
+                const contentWidth = 1120;
+                const commands = [];
+
+                let y = 0;
+
+                function wrap(value, width, size, bold = false) {
+                    ctx.font = `${bold ? "bold " : ""}${size}px Arial`;
+
+                    const lines = [];
+
+                    for (const paragraph of String(value).split("\n")) {
+                        let line = "";
+
+                        for (const character of paragraph) {
+                            if (
+                                line &&
+                                ctx.measureText(line + character).width > width
+                            ) {
+                                lines.push(line);
+                                line = "";
+                            }
+
+                            line += character;
+                        }
+
+                        lines.push(line);
+                    }
+
+                    return lines;
+                }
+
+                function text(value, x, width, size = 23, bold = false) {
+                    const lines = wrap(value, width, size, bold);
+
+                    lines.forEach((line, index) => {
+                        commands.push({
+                            type: "text",
+                            value: line,
+                            x,
+                            y: y + index * size * 1.3,
+                            size,
+                            bold
+                        });
+                    });
+
+                    return lines.length * size * 1.3;
+                }
+
+                function heading(title) {
+                    y += 18;
+                    y += text(title, 0, contentWidth, 27, true);
+                    y += 10;
+                }
+
+                function table(headers, rows, widths) {
+                    function addRow(cells, header = false) {
+                        const size = header ? 20 : 23;
+
+                        const lines = cells.map((value, index) => {
+                            return wrap(value, widths[index] - 20, size, header);
+                        });
+
+                        const height =
+                            Math.max(...lines.map(cell => cell.length)) *
+                            size * 1.3 + 18;
+
+                        commands.push({
+                            type: "row",
+                            y,
+                            height,
+                            header
+                        });
+
+                        let x = 0;
+
+                        lines.forEach((cell, index) => {
+                            cell.forEach((line, lineIndex) => {
+                                commands.push({
+                                    type: "text",
+                                    value: line,
+                                    x: x + 10,
+                                    y: y + 9 + lineIndex * size * 1.3,
+                                    size,
+                                    bold: header
+                                });
+                            });
+
+                            x += widths[index];
+                        });
+
+                        y += height;
+                    }
+
+                    addRow(headers, true);
+                    rows.forEach(row => addRow(row));
+                }
+
+                function taskTable(tasks) {
+                    table(
+                        ["Работа", "Кол-во", "Статус", "Комментарий"],
+
+                        tasks.map(task => [
+                            task.name,
+                            task.count || "—",
+                            task.status,
+                            task.comment || "—"
+                        ]),
+
+                        [390, 90, 180, 460]
+                    );
+                }
+
+                y += text("ИТОГИ НЕДЕЛИ", 0, contentWidth, 18, true);
+                y += 12;
+                y += text(data.person, 0, contentWidth, 40, true);
+                y += 8;
+                y += text(data.week, 0, contentWidth, 22);
+
+                const completed = data.tasks.filter(task => {
+                    return task.status === "Сделано";
+                });
+
+                const unfinished = data.tasks.filter(task => {
+                    return task.status !== "Сделано";
+                });
+
+                heading("Что получилось сделать");
+
+                if (completed.length) {
+                    taskTable(completed);
+                } else {
+                    y += text("Не указано", 0, contentWidth, 21);
+                }
+
+                heading("Таблица по соцсети");
+
+                if (data.socials.length) {
+                    table(
+                        ["Площадка", "Показатели"],
+
+                        data.socials.map(social => [
+                            social.name,
+
+                            social.values.map(([label, value]) => {
+                                return label + ": " + Number(value).toLocaleString("ru-RU");
+                            }).join(" · ")
+                        ]),
+
+                        [200, 920]
+                    );
+                } else {
+                    y += text("Соцсети не заполнены", 0, contentWidth, 21);
+                }
+
+                heading("Что не получилось сделать");
+
+                if (unfinished.length) {
+                    taskTable(unfinished);
+                }
+
+                if (data.unfinished) {
+                    y += 8;
+                    y += text(data.unfinished, 0, contentWidth);
+                } else if (!unfinished.length) {
+                    y += text("Не указано", 0, contentWidth, 21);
+                }
+
+                const scale = Math.min(1, 1590 / y);
+
+                canvas.width = 1240;
+                canvas.height = Math.ceil(y * scale + 80);
+
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.translate(
+                    (canvas.width - contentWidth * scale) / 2,
+                    40
+                );
+
+                ctx.scale(scale, scale);
+
+                for (const command of commands) {
+                    if (command.type === "row") {
+                        ctx.fillStyle = command.header ? "#eaf0e7" : "#ffffff";
+
+                        ctx.fillRect(
+                            0,
+                            command.y,
+                            contentWidth,
+                            command.height
+                        );
+
+                        ctx.strokeStyle = "#dce4d8";
+                        ctx.beginPath();
+                        ctx.moveTo(0, command.y + command.height);
+                        ctx.lineTo(contentWidth, command.y + command.height);
+                        ctx.stroke();
+                    } else {
+                        ctx.font =
+                            `${command.bold ? "bold " : ""}${command.size}px Arial`;
+
+                        ctx.textBaseline = "top";
+                        ctx.fillStyle = "#334237";
+
+                        ctx.fillText(
+                            command.value,
+                            command.x,
+                            command.y
+                        );
+                    }
+                }
+
+                $("density").hidden = scale >= 0.8;
+
+                return canvas;
+            }
+
+            // 11. ПОЛУЧИТЬ И СКАЧАТЬ ОТЧЁТ
+
+            $("editor").onsubmit = async event => {
+                event.preventDefault();
+
+                const data = collectData();
+
+                if (data.tasks.some(task => !task.name)) {
+                    $("error").textContent =
+                        "Укажи название каждой работы с выбранным статусом.";
+
+                    $("error").hidden = false;
+                    return;
+                }
+
+                $("error").hidden = true;
+                $("generate").disabled = true;
+
+                try {
+                    const canvas = makeReport(data);
+
+                    const blob = await new Promise(resolve => {
+                        canvas.toBlob(resolve, "image/png");
+                    });
+
+                    if (!blob) throw new Error("PNG не создан");
+
+                    if (imageUrl) URL.revokeObjectURL(imageUrl);
+
+                    imageUrl = URL.createObjectURL(blob);
+                    downloadName = "Отчёт-" + data.person + ".png";
+
+                    $("report-image").src = imageUrl;
+                    $("reset-confirm").hidden = true;
+
+                    showScreen("result");
+                } catch {
+                    $("error").textContent =
+                        "Не удалось создать картинку. Попробуй ещё раз.";
+
+                    $("error").hidden = false;
+                } finally {
+                    $("generate").disabled = false;
+                }
+            };
+
+            $("download").onclick = () => {
+                if (!imageUrl) return;
+
+                const link = document.createElement("a");
+
+                link.href = imageUrl;
+                link.download = downloadName;
+
+                document.body.append(link);
+                link.click();
+                link.remove();
+            };
+
+            // При возврате к странице из кэша очищаем сам отчёт.
+            // Сохранённые списки работ остаются.
+
+
+        </script>
+    </body>
+
+    </html>
+
+</body>
+
+</html>
